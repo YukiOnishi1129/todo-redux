@@ -1,4 +1,4 @@
-// Storeの定義
+// 初期状態の設定
 const initialState = {
   todos: [
     {
@@ -6,8 +6,13 @@ const initialState = {
       title: 'Task1',
       editFlg: false,
     },
+    {
+      id: 2,
+      title: 'Task2',
+      editFlg: false,
+    },
   ],
-  uniqueId: 1, // todoが初期値で2つあるため、todo追加した際のidの採番を3から開始する
+  uniqueId: 2, // todoが初期値で2つあるため、todo追加した際のidの採番を3から開始する
   inputValue: '', // todo追加フォームの入力値(初期値は空文字)
   searchKeyWord: '', //検索キーワード
 };

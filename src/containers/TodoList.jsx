@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
-import TodoApp from '../components/TodoApp';
+import TodoList from '../components/TodoList';
 
 // mapStateToProps
-const mapStateToProps = (todos) => {
+const mapStateToProps = (state) => {
   return {
-    todos,
+    // state.reducer名.プロパティ
+    todos: state.tasksReducer.todos,
   };
 };
 
@@ -19,4 +20,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // connect(state, action)(component)
-export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

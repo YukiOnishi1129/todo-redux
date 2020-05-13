@@ -4,12 +4,10 @@ const initialState = {
     {
       id: 1,
       title: 'Task1',
-      editFlg: false,
     },
     {
       id: 2,
       title: 'Task2',
-      editFlg: false,
     },
   ],
   uniqueId: 2, // todoが初期値で2つあるため、todo追加した際のidの採番を3から開始する
@@ -37,7 +35,6 @@ export default function tasksReducer(state = initialState, action) {
         todos: state.todos.concat({
           id: action.payload.id,
           title: action.payload.title,
-          editFlg: false,
         }),
         uniqueId: action.payload.id,
       });
@@ -54,6 +51,18 @@ export default function tasksReducer(state = initialState, action) {
     //     ],
     //     uniqueId: action.payload.id,
     //   };
+    case 'UPDATE':
+      return Object.assign({}, state, {
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload.id) {
+            return Object.assign({}, todo, {
+              title: action.payload.title,
+            });
+          }
+          return todo;
+        }),
+      });
+
     case 'DELETE':
       return Object.assign({}, state, {
         todos: removeTodo(state.todos, action.payload.id),

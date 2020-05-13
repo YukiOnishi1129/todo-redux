@@ -6,3 +6,10 @@ export const addTodo = (id, title) => ({
     title,
   },
 });
+
+export const deleteTodo = (id) => ({
+  type: 'DELETE',
+  payload: {
+    id,
+  },
+});

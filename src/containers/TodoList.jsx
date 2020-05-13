@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-// import { addTodo } from '../actions';
+import { deleteTodo } from '../actions';
 import TodoList from '../components/TodoList';
 
 // mapStateToProps
@@ -12,17 +12,14 @@ const mapStateToProps = (state) => {
 };
 
 // mapDispatchToProps
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onEnterUpdateTodo: (id, title) => {
-//       dispatch(addTodo(id, title));
-//     },
-//     onUpdateId: (id) => {
-//       dispatch(updateUniqueId(id));
-//     },
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClickDelete: (id) => {
+      dispatch(deleteTodo(id));
+    },
+  };
+};
 
 // connect(state, action)(component)
 // export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -16,6 +16,11 @@ const initialState = {
   searchKeyWord: '', //検索キーワード
 };
 
+// Todo削除用の関数
+const removeTodo = (todos, targetId) => {
+  return todos.filter((todo) => todo.id !== targetId);
+};
+
 // Reducerの定義
 export default function tasksReducer(state = initialState, action) {
   switch (action.type) {
@@ -25,9 +30,9 @@ export default function tasksReducer(state = initialState, action) {
       // state = action.payload.dataなど、直接代入させると変更が通知されない
       // (参照渡しであるため)
       // よって、Object.assigまたはspread構文で更新する
+      // 現在のstateとactionの値をマージして新しいstateを返す
 
       // Object.assignの記述方法
-      // 現在のstateとactionの値をマージして新しいstateを返す
       return Object.assign({}, state, {
         todos: state.todos.concat({
           id: action.payload.id,
@@ -37,7 +42,6 @@ export default function tasksReducer(state = initialState, action) {
         uniqueId: action.payload.id,
       });
     //   spread operatorの記述方法
-    // 現在のstateとactionの値をマージして新しいstateを返す
     //   return {
     //     ...state,
     //     todos: [
@@ -50,6 +54,10 @@ export default function tasksReducer(state = initialState, action) {
     //     ],
     //     uniqueId: action.payload.id,
     //   };
+    case 'DELETE':
+      return Object.assign({}, state, {
+        todos: removeTodo(state.todos, action.payload.id),
+      });
     default:
       return state;
   }

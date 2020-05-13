@@ -3,10 +3,11 @@ import Todo from './Todo';
 
 export default class TodoList extends Component {
   render() {
-    const { todos } = this.props;
+    // propsからstate, イベントを取得できる
+    // const { todos } = this.props;
 
     // map関数で実施した場合(こっちがシンプルに書ける)
-    const todoList = todos.map((todo) => {
+    const todoList = this.props.todos.map((todo) => {
       return <Todo key={todo.id} {...todo} />;
     });
     return (

@@ -13,7 +13,6 @@ const initialState = {
     },
   ],
   uniqueId: 2, // todoが初期値で2つあるため、todo追加した際のidの採番を3から開始する
-  inputValue: '', // todo追加フォームの入力値(初期値は空文字)
   searchKeyWord: '', //検索キーワード
 };
 
@@ -22,8 +21,15 @@ export default function tasksReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD':
       return {
-        ...state,
-        todos: state.todos.concat(action.payload.todo),
+        todos: [
+          ...state.todos,
+          {
+            id: action.payload.id,
+            title: action.payload.title,
+            editFlg: false,
+          },
+        ],
+        uniqueId: action.payload.id,
       };
     default:
       return state;

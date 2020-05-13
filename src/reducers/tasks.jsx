@@ -14,6 +14,18 @@ const initialState = {
   searchKeyWord: '', //検索キーワード
 };
 
+// Todo更新用の関数
+const UpdateTodo = (todos, targetId, title) => {
+  return todos.map((todo) => {
+    if (todo.id === targetId) {
+      return Object.assign({}, todo, {
+        title: title,
+      });
+    }
+    return todo;
+  });
+};
+
 // Todo削除用の関数
 const removeTodo = (todos, targetId) => {
   return todos.filter((todo) => todo.id !== targetId);
@@ -51,22 +63,27 @@ export default function tasksReducer(state = initialState, action) {
     //     ],
     //     uniqueId: action.payload.id,
     //   };
+
     case 'UPDATE':
       return Object.assign({}, state, {
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.payload.id) {
-            return Object.assign({}, todo, {
-              title: action.payload.title,
-            });
-          }
-          return todo;
-        }),
+        todos: UpdateTodo(state.todos, action.payload.id, action.payload.title),
       });
+    //   return Object.assign({}, state, {
+    //     todos: state.todos.map((todo) => {
+    //       if (todo.id === action.payload.id) {
+    //         return Object.assign({}, todo, {
+    //           title: action.payload.title,
+    //         });
+    //       }
+    //       return todo;
+    //     }),
+    //   });
 
     case 'DELETE':
       return Object.assign({}, state, {
         todos: removeTodo(state.todos, action.payload.id),
       });
+
     default:
       return state;
   }

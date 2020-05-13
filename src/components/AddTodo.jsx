@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class AddTodo extends Component {
   constructor() {
@@ -19,6 +20,7 @@ export default class AddTodo extends Component {
   handleAdd(e) {
     // エンターキーが押された際にtodoを追加
     if (e.keyCode === 13 && e.target.value !== '') {
+      // Todo追加処理
       this.props.onEnterUpdateTodo(this.props.uniqueId + 1, e.target.value);
       // todo追加後、フォームの値をリセットする
       this.setState({ inputValue: '' });
@@ -40,3 +42,9 @@ export default class AddTodo extends Component {
     );
   }
 }
+
+// Propsの型チェック
+AddTodo.propTypes = {
+  uniqueId: PropTypes.number.isRequired,
+  onEnterUpdateTodo: PropTypes.func.isRequired,
+};

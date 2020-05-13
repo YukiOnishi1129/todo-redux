@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
+import PropTypes from 'prop-types';
 
 export default class TodoList extends Component {
   render() {
@@ -17,3 +18,14 @@ export default class TodoList extends Component {
     );
   }
 }
+
+// Propsの型チェック
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      editFlg: PropTypes.bool.isRequired,
+    }).isRequired
+  ).isRequired,
+};

@@ -2,11 +2,19 @@ import { connect } from 'react-redux';
 import { updateTodo, deleteTodo } from '../actions';
 import TodoList from '../components/TodoList';
 
+// アロー関数にするとthisのスコープが変わるため、functionの記法にしている
+const searchResult = function (todo) {
+  const regexp = new RegExp('^' + this.searchKeyWord, 'i');
+  return todo.title.match(regexp);
+};
+
 // mapStateToProps
 const mapStateToProps = (state) => {
   return {
     // state.reducer名.プロパティ
-    todos: state.tasksReducer.todos,
+    todos: state.tasksReducer.searchKeyWord
+      ? state.tasksReducer.todos.filter(searchResult, state.tasksReducer)
+      : state.tasksReducer.todos,
     uniqueId: state.tasksReducer.uniqueId,
   };
 };

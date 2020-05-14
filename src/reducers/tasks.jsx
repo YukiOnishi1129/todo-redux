@@ -64,6 +64,9 @@ export default function tasksReducer(state = initialState, action) {
     //     uniqueId: action.payload.id,
     //   };
 
+    case 'SEARCH':
+      return Object.assign({}, state, { searchKeyWord: action.payload.text });
+
     case 'UPDATE':
       return Object.assign({}, state, {
         todos: UpdateTodo(state.todos, action.payload.id, action.payload.title),

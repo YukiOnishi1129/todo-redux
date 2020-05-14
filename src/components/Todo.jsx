@@ -6,7 +6,6 @@ export default class Todo extends Component {
     super(props);
     this.state = {
       text: this.props.title, // todoの内容は親から渡ってきたtitleを表示
-      oldTitle: this.props.title,
       editFlg: false,
     };
     this.handleClickEditForm = this.handleClickEditForm.bind(this);

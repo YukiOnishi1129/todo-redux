@@ -7,6 +7,13 @@ export const addTodo = (id, title) => ({
   },
 });
 
+export const searchTodo = (text) => ({
+  type: 'SEARCH',
+  payload: {
+    text,
+  },
+});
+
 export const updateTodo = (id, title) => ({
   type: 'UPDATE',
   payload: {
